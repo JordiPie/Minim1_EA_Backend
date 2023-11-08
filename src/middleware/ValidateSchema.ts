@@ -4,6 +4,7 @@ import Logging from '../library/Logging';
 import { IUser } from '../models/User';
 import { ISchedule } from '../models/Schedule';
 import { IAsignatura } from '../models/Asignatura';
+import { IProfessor } from '../models/Professor';
 
 export const ValidateSchema = (schema: ObjectSchema) => {
     return async (req: Request, res: Response, next: NextFunction) => {
@@ -48,12 +49,26 @@ export const Schemas = {
     },
     asignatura: {
         create: Joi.object<IAsignatura>({
-            name: Joi.string().required() /* ,
-            schedule: Joi.array().required() */
+            name: Joi.string().required() ,
+            /*schedule: Joi.array().required() */
+            professor: Joi.array().required()
         }),
         update: Joi.object<IAsignatura>({
             name: Joi.string().required(),
-            schedule: Joi.array().required()
+            schedule: Joi.array().required(),
+            professor: Joi.array().required()
+        })
+    },
+    professor: {
+        create: Joi.object<IProfessor>({
+            name: Joi.string().required(),
+            email: Joi.string().email().required(),
+            age: Joi.number().required()
+        }),
+        update: Joi.object<IProfessor>({
+            name: Joi.string().required(),
+            email: Joi.string().email().required(),
+            age: Joi.number().required()
         })
     }
 };

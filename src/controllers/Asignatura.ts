@@ -2,14 +2,16 @@ import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Asignatura from '../models/Asignatura';
 import User from '../models/User';
+import Professor from '../models/Professor';
 
 const createAsignatura = (req: Request, res: Response, next: NextFunction) => {
-    const { name, schedule } = req.body;
+    const { name, schedule, professor } = req.body;
 
     const asignatura = new Asignatura({
         _id: new mongoose.Types.ObjectId(),
         name,
-        schedule
+        schedule,
+        professor
     });
 
     return asignatura
